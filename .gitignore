@@ -16,7 +16,7 @@
 *.dylib
 *.dll
 
-# Fortran module files
+# Fortran module filesz
 *.mod
 *.smod
 
@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+.idea/*
+*.pdf
+.idea
+cmake-build-debug
+*.txt
+
+
+
+
+
+*.txt
+CMakeLists.txt
