@@ -6,13 +6,17 @@
 #include <string>
 
 #include "PatientManagementSystem.h"
+#include "PatientFileLoader.h"
 
 int main()
 {
-	auto pms = std::make_unique<PatientManagementSystem>();
+//	auto pms = std::make_unique<PatientManagementSystem>();
+//
+//	pms->init();
+//	pms->run();
 
-	pms->init();
-	pms->run();
+    PatientFileLoader pFile;
+    pFile.loadPatientFile("../patients.txt");
 
 	return 0;
 }

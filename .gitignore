@@ -34,7 +34,8 @@
 *.pdf
 .idea
 cmake-build-debug
-*.txt
+CMakeLists.txt
+
 
 
 

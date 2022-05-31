@@ -39,7 +39,7 @@ public:
 	void addDiagnosis(const std::string& diagnosis);
 	const std::string& primaryDiagnosis() const;
 
-	// add a vitals mesaurements record to the patient
+	// add a vitals measurements record to the patient
 	void addVitals(const Vitals* v);
 	const std::vector<const Vitals*> vitals() const;
 
