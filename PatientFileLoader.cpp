@@ -26,18 +26,16 @@ std::vector<Patient*> PatientFileLoader::loadPatientFile(const std::string& file
         inFile.close();
     }
 
+    std::tm birthday{};
+    vector<string> tmp;
+    std::string diagnosis;
     std::string nickName;
     std::string firstName;
     std::string lastName;
-    std::tm birthday{};
-    vector<string> tmp;
-    int year;
-    int month;
-    int date;
-    std::string diagnosis;
 
     for(auto & l : lines) { // loop each line
         std::vector<string> ws = Helper::splitString(l, "|"); // split line by "|"
+
         for (size_t i = 0; i < ws.size(); i++) {
             string w = ws[i];
             if (i == 0) { //  get nickname
@@ -47,10 +45,8 @@ std::vector<Patient*> PatientFileLoader::loadPatientFile(const std::string& file
                 firstName = tmp[0];
                 lastName = tmp[1];
             } else if (i == 2) { // get birthday
-                tmp = Helper::splitString(w, "-");
-                std::istringstream(tmp[0]) >> year;
-                std::istringstream(tmp[1]) >> month;
-                std::istringstream(tmp[2]) >> date;
+                std::istringstream ss(w);
+                ss >> std::get_time(&birthday, "%d-%m-%Y");
             } else if (i == 3) { // get diagnosis
                 if (w == "Boneitis") {
                     diagnosis = Diagnosis::BONEITIS;
@@ -62,12 +58,8 @@ std::vector<Patient*> PatientFileLoader::loadPatientFile(const std::string& file
             } else { // get vitals
             }
         }
-
-        birthday.tm_year = year;
-        birthday.tm_mon = month;
-        birthday.tm_mday = date;
-        Patient newPatient = Patient(firstName, lastName, birthday);
-        newPatient.addDiagnosis(diagnosis);
+        auto* newPatient = new Patient(firstName, lastName, birthday);
+        newPatient->addDiagnosis(diagnosis);
 
         // add vitals
         if (ws.size() == 5){
@@ -75,19 +67,13 @@ std::vector<Patient*> PatientFileLoader::loadPatientFile(const std::string& file
             vector<string> vs = Helper::splitString(vitalParts, ";");
             for(auto & v : vs) { // loop each vital
                 vector<string> params = Helper::splitString(v, ",");
-                float bt;
-                int bp;
-                int hr;
-                int rr;
-                std::istringstream ( tmp[0] ) >> bt;
-                std::istringstream ( tmp[1] ) >> bp;
-                std::istringstream ( tmp[2] ) >> hr;
-                std::istringstream ( tmp[3] ) >> rr;
-                Vitals newV = Vitals(bt,bp, hr, rr);
-                newPatient.addVitals(&newV);
+//                cout <<  << endl;
+                auto* newV = new Vitals(std::stof(params[0]), std::stoi(params[1]),
+                                        std::stoi(params[2]), std::stoi(params[3]));
+                newPatient->addVitals(newV);
             }
         }
-        patients.push_back(&newPatient);
+        patients.push_back(newPatient);
 
     }
     return patients;

@@ -11,8 +11,8 @@ public:
 	virtual void initialiseConnection() = 0;
 
 	// load patients from that database.
-	// This method should allocated dynamic (i.e. new-ed) Patients into
-	// the vector reference. The fucntion caller must take responsibilty for
+	// This method should allocate dynamic (i.e. new-ed) Patients into
+	// the vector reference. The function caller must take responsibility for
 	// cleaning up the memory.
 	virtual void loadPatients(std::vector<Patient*>& patientIn) = 0;
 

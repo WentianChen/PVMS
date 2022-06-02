@@ -29,8 +29,8 @@ int Patient::age() const
 std::string Patient::uid() const
 {
 	std::stringstream ss;
-	ss << (char)std::tolower(_lastName.at(0)) 
-	   << (char)std::tolower(_firstName.at(0))
+	ss << (char)std::tolower(_firstName.at(0))
+	   << (char)std::tolower(_lastName.at(0))
 	   << std::setfill('0') << std::setw(2) << (_birthday.tm_mon + 1) 
 	   << _birthday.tm_year;
 	return ss.str();
