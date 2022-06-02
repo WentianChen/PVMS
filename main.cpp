@@ -10,13 +10,13 @@
 
 int main()
 {
-//	auto pms = std::make_unique<PatientManagementSystem>();
-//
-//	pms->init();
-//	pms->run();
+	auto pms = std::make_unique<PatientManagementSystem>();
 
-    PatientFileLoader pFile;
-    pFile.loadPatientFile("../patients.txt");
+	pms->init();
+	pms->run();
+//
+//    PatientFileLoader pFile;
+//    std::vector<Patient*> ps = pFile.loadPatientFile("../patients.txt");
 
 	return 0;
 }
