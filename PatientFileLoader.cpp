@@ -9,7 +9,7 @@
 #include "Helper.h"
 
 
-std::vector<Patient*> PatientFileLoader::loadPatientFile(const std::string& file)
+std::vector<Patient*> PatientFileLoader::loadPatients(const std::string& file)
 {
 	vector<Patient*> patients{};
     stringstream ss;

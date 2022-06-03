@@ -31,7 +31,7 @@ void PatientDatabaseLoader::loadPatients(std::vector<Patient*>& patientIn){
     patientIn.push_back(p);
 
     // load patients from a file
-    std::vector<Patient*> patientsFromFile = _patientFileLoader->loadPatientFile("../patients.txt");
+    std::vector<Patient*> patientsFromFile = _patientFileLoader->loadPatients("../patients.txt");
     for (Patient* _p : patientsFromFile) {
         patientIn.push_back(_p);
     }
