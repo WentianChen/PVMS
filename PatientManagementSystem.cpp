@@ -106,6 +106,12 @@ void PatientManagementSystem::addVitalsRecord()
         //calculate the patient alert levels
         _patientLookup[pid]->setAlertLevel(_patientLookup[pid]->calculateLevel());
 
+        // notification
+        auto hp = new HospitalAlertSystemFacade();
+        hp->sendAlertForPatient(_patientLookup[pid]);
+
+        auto gp = new GPNotificationSystemFacade();
+        gp->sendGPNotificationForPatient(_patientLookup[pid]);
 
 	}
 	else {
