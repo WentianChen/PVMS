@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "NotificationContext.h"
+#include "Publisher.h"
 
 
 // forward declare several classes
@@ -35,8 +36,8 @@ public:
 protected:
 	std::vector<Patient*> _patients;
 	std::map<std::string, Patient*> _patientLookup;
-
 	std::unique_ptr<AbstractPatientDatabaseLoader> _patientDatabaseLoader;
+    Publisher* _publisher;
 
 };
 

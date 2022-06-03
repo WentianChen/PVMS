@@ -18,6 +18,8 @@ PatientManagementSystem::PatientManagementSystem() :
 	_patientDatabaseLoader(std::make_unique<PatientDatabaseLoader>())
 {
 	_patientDatabaseLoader->initialiseConnection();
+    _publisher = new Publisher();
+
 }
 
 PatientManagementSystem::~PatientManagementSystem()
@@ -39,7 +41,10 @@ void PatientManagementSystem::init()
 
 	for (Patient* p : _patients) {
 		// TODO: do any processing you need here
-	}
+        // add all patients as subscriber to Publisher
+        auto* newSub = new Subscriber(p);
+        _publisher->Register(newSub);
+    }
 }
 
 void PatientManagementSystem::run()
@@ -105,10 +110,12 @@ void PatientManagementSystem::addVitalsRecord()
         _patientLookup[pid]->setAlertLevel(_patientLookup[pid]->calculateLevel());
 
         // notification
-        NotificationContext *notificationContext = new NotificationContext(new HospitalAlertSystemFacade());
-        notificationContext->send(_patientLookup[pid]);
-        notificationContext->set_notification(new GPNotificationSystemFacade());
-        notificationContext->send(_patientLookup[pid]);
+//        NotificationContext *notificationContext = new NotificationContext(new HospitalAlertSystemFacade());
+//        notificationContext->send(_patientLookup[pid]);
+//        notificationContext->set_notification(new GPNotificationSystemFacade());
+//        notificationContext->send(_patientLookup[pid]);
+
+        _publisher->Notify();
 
 	}
 	else {
