@@ -108,10 +108,10 @@ void PatientManagementSystem::addVitalsRecord()
 
         // notification
         auto hp = new HospitalAlertSystemFacade();
-        hp->sendAlertForPatient(_patientLookup[pid]);
+        hp->sendNotification(_patientLookup[pid]);
 
         auto gp = new GPNotificationSystemFacade();
-        gp->sendGPNotificationForPatient(_patientLookup[pid]);
+        gp->sendNotification(_patientLookup[pid]);
 
 	}
 	else {

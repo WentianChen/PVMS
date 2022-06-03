@@ -1,15 +1,12 @@
 #pragma once
 
 #include "Patient.h"
+#include "NotificationSystem.h"
 
 
-class HospitalAlertSystemFacade
+class HospitalAlertSystemFacade : public NotificationSystem
 {
 public:
-	HospitalAlertSystemFacade();
-	virtual ~HospitalAlertSystemFacade();
-
-	void sendAlertForPatient(Patient* p);
-
+    void sendNotification(Patient *p) override;
 };
 

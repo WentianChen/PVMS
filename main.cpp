@@ -15,11 +15,5 @@ int main()
 	pms->init();
 	pms->run();
 
-//    PatientFileLoader pFile;
-//    std::vector<Patient*> ps = pFile.loadPatientFile("../patients.txt");
-//    for (Patient* p : ps) {
-//        std::cout << *p << std::endl;
-//    }
-
 	return 0;
 }
