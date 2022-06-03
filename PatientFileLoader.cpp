@@ -67,7 +67,6 @@ std::vector<Patient*> PatientFileLoader::loadPatientFile(const std::string& file
             vector<string> vs = Helper::splitString(vitalParts, ";");
             for(auto & v : vs) { // loop each vital
                 vector<string> params = Helper::splitString(v, ",");
-//                cout <<  << endl;
                 auto* newV = new Vitals(std::stof(params[0]), std::stoi(params[1]),
                                         std::stoi(params[2]), std::stoi(params[3]));
                 newPatient->addVitals(newV);

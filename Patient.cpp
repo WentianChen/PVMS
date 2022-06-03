@@ -97,3 +97,41 @@ void Patient::setAlertLevel(AlertLevel level)
 		cout << endl;
 	}
 }
+
+AlertLevel Patient::calculateLevel()
+{
+    AlertLevel level = AlertLevel::Green;
+    if (!_vitals.empty()){
+        if (_diagnosis.back() == Diagnosis::BONEITIS){
+            if (_vitals.back()->RR() > 40) {
+                level = AlertLevel::Red;
+            }
+            if( (_vitals.back()->RR() > 30) &&  (_vitals.back()->RR() <= 40)){
+                level = AlertLevel::Orange;
+            }
+            if( (_vitals.back()->RR() > 20) &&  (_vitals.back()->RR() <= 30)){
+                level = AlertLevel::Yellow;
+            }
+        }
+        if (_diagnosis.back() == Diagnosis::GREYSCALE){
+            if( (_vitals.back()->HR() > 120) &&  (age() < 12) ){
+                level = AlertLevel::Red;
+            }
+            if( (_vitals.back()->HR() > 100) &&  (age() >= 12) ){
+                level = AlertLevel::Red;
+            }
+        }
+        if (_diagnosis.back() == Diagnosis::SIMIAN_FLU){
+            if( _vitals.back()->BP() > 140){
+                level = AlertLevel::Red;
+            }
+            if( (_vitals.back()->BP() > 130) &&  (_vitals.back()->BP() <= 140)){
+                level = AlertLevel::Orange;
+            }
+            if( (_vitals.back()->BP() > 110) &&  (_vitals.back()->BP() <= 130)){
+                level = AlertLevel::Yellow;
+            }
+        }
+    }
+    return level;
+}

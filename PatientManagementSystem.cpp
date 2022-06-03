@@ -100,8 +100,13 @@ void PatientManagementSystem::addVitalsRecord()
 		cout << "enter respitory rate: ";
 		cin >> respitoryRate;
 
-		Vitals* v = new Vitals(bodyTemperature, bloodPressure, heartRate, respitoryRate);
+		auto* v = new Vitals(bodyTemperature, bloodPressure, heartRate, respitoryRate);
 		_patientLookup[pid]->addVitals(v);
+
+        //calculate the patient alert levels
+        _patientLookup[pid]->setAlertLevel(_patientLookup[pid]->calculateLevel());
+
+
 	}
 	else {
 		cout << "Patient not found" << endl;
