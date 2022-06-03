@@ -15,9 +15,7 @@ using namespace std;
 
 
 PatientManagementSystem::PatientManagementSystem() :
-	_patientDatabaseLoader(std::make_unique<PatientDatabaseLoader>()),
-	_hospitalAlertSystem(std::make_unique<HospitalAlertSystemFacade>()),
-	_gpNotificationSystem(std::make_unique<GPNotificationSystemFacade>())
+	_patientDatabaseLoader(std::make_unique<PatientDatabaseLoader>())
 {
 	_patientDatabaseLoader->initialiseConnection();
 }
@@ -107,11 +105,10 @@ void PatientManagementSystem::addVitalsRecord()
         _patientLookup[pid]->setAlertLevel(_patientLookup[pid]->calculateLevel());
 
         // notification
-        auto hp = new HospitalAlertSystemFacade();
-        hp->sendNotification(_patientLookup[pid]);
-
-        auto gp = new GPNotificationSystemFacade();
-        gp->sendNotification(_patientLookup[pid]);
+        NotificationContext *notificationContext = new NotificationContext(new HospitalAlertSystemFacade());
+        notificationContext->send(_patientLookup[pid]);
+        notificationContext->set_notification(new GPNotificationSystemFacade());
+        notificationContext->send(_patientLookup[pid]);
 
 	}
 	else {
