@@ -13,12 +13,15 @@ private:
 
 public:
 
-	// Inherited via AbstractPatientDatabaseLoader
+    // Inherited via AbstractPatientDatabaseLoader
 	virtual void initialiseConnection() override;
 
 	virtual void loadPatients(std::vector<Patient*>& patientIn) override;
 
 	virtual void closeConnection() override;
+
+    void setFileLoader( PatientFileLoader* loader){_patientFileLoader=loader;};
+    PatientFileLoader* getFileLoader(){ return _patientFileLoader;};
 
 };
 

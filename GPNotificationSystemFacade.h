@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Patient.h"
-#include "NotificationSystem.h"
 
 
-class GPNotificationSystemFacade : public NotificationSystem
-{
+class GPNotificationSystemFacade {
 public:
-    void sendNotification(Patient *p) override;
-};
+    GPNotificationSystemFacade();
+    virtual ~GPNotificationSystemFacade();
 
+    void sendGPNotificationForPatient(Patient* p);
+};

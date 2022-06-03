@@ -3,9 +3,9 @@
 
 
 #include "Patient.h"
-#include "NotificationContext.h"
+#include "AlertStrategyContext.h"
 #include "GPNotificationSystemFacade.h"
-#include "HospitalAlertSystemFacade.h"
+#include "HospitalNotificationSystemFacade.h"
 
 class Subscriber {
 private:
@@ -15,10 +15,11 @@ public:
         _patient = p;
     }
     void Update(){
-        NotificationContext *notificationContext = new NotificationContext(new HospitalAlertSystemFacade());
-        notificationContext->send(_patient);
-        notificationContext->set_notification(new GPNotificationSystemFacade());
-        notificationContext->send(_patient);
+        auto* gpNotificationSystemFacade = new GPNotificationSystemFacade();
+        gpNotificationSystemFacade->sendGPNotificationForPatient(_patient);
+        auto* hospitalAlertStrategyFacade = new HospitalNotificationSystemFacade();
+        hospitalAlertStrategyFacade->sendAlertForPatient(_patient);
+
     };
 };
 

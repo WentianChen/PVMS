@@ -8,6 +8,17 @@
 #include "Vitals.h"
 #include "Helper.h"
 
+void PatientFileLoader::initialiseConnection() {
+
+}
+
+void PatientFileLoader::loadPatients(vector<Patient *> &patientIn) {
+
+}
+
+void PatientFileLoader::closeConnection() {
+
+}
 
 std::vector<Patient*> PatientFileLoader::loadPatients(const std::string& file)
 {

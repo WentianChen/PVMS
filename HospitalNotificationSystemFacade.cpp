@@ -1,9 +1,16 @@
-#include "HospitalAlertSystemFacade.h"
+#include "HospitalNotificationSystemFacade.h"
 
 #include <iostream>
 
 
-void HospitalAlertSystemFacade::sendNotification(Patient *p) {
+HospitalNotificationSystemFacade::HospitalNotificationSystemFacade()
+{ }
+
+HospitalNotificationSystemFacade::~HospitalNotificationSystemFacade()
+{ }
+
+void HospitalNotificationSystemFacade::sendAlertForPatient(Patient* p)
+{
     if (p->alertLevel() == AlertLevel::Red) {
         // A mocked alert message. A real message would use an SMS/pager gateway or similar
         std::cout << std::endl;

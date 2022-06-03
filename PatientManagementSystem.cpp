@@ -8,16 +8,15 @@
 #include "PatientDatabaseLoader.h"
 #include "Vitals.h"
 
-#include "GPNotificationSystemFacade.h"
-#include "HospitalAlertSystemFacade.h"
 
 using namespace std;
 
 
-PatientManagementSystem::PatientManagementSystem() :
-	_patientDatabaseLoader(std::make_unique<PatientDatabaseLoader>())
+PatientManagementSystem::PatientManagementSystem()
 {
-	_patientDatabaseLoader->initialiseConnection();
+    _patientDatabaseLoader = new PatientDatabaseLoader();
+    _patientDatabaseLoader->setFileLoader(new PatientFileLoader());
+    _patientDatabaseLoader->initialiseConnection();
     _publisher = new Publisher();
 
 }
@@ -107,14 +106,10 @@ void PatientManagementSystem::addVitalsRecord()
 		_patientLookup[pid]->addVitals(v);
 
         //calculate the patient alert levels
-        _patientLookup[pid]->setAlertLevel(_patientLookup[pid]->calculateLevel());
+        AlertStrategyContext alertStrategyContext(_patientLookup[pid]->primaryDiagnosis());
+        _patientLookup[pid]->setAlertLevel(alertStrategyContext.alertLevel(_patientLookup[pid]));
 
         // notification
-//        NotificationContext *notificationContext = new NotificationContext(new HospitalAlertSystemFacade());
-//        notificationContext->send(_patientLookup[pid]);
-//        notificationContext->set_notification(new GPNotificationSystemFacade());
-//        notificationContext->send(_patientLookup[pid]);
-
         _publisher->Notify();
 
 	}
