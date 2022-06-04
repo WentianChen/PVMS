@@ -43,7 +43,6 @@ CMakeLists.txt
 
 *.txt
 CMakeLists.txt
-/report.docx
 /~$chart.pptx
 /~$report.docx
 /chart.pptx
