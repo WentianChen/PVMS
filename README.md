@@ -1,2 +1,2 @@
 # PVMS
-A2-Patient Vitals Management System
+Patient Vitals Management System
